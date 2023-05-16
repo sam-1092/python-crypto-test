@@ -1,6 +1,7 @@
 import numpy as np
 #import matplotlib.pyplot as plt
 import pandas as pd
+import pytz
 from pandas_datareader import data as pdr
 import datetime as dt
 import yfinance as yf
@@ -22,9 +23,9 @@ def home_page() :
     print(query)
     crypto_currency = query
     fiat_currency = 'USD'
-
-    startdate = dt.datetime(2022,1,1)
-    enddate = dt.datetime.now()
+    tz = pytz.timezone("Asia/Kolkata")
+    startdate = tz.localize(dt.datetime(2022,1,1))
+    enddate = tz.localize(dt.datetime.today())
 
     data = pdr.get_data_yahoo(f'{crypto_currency}-{fiat_currency}', start=startdate, end=enddate)
     print(data)
@@ -56,8 +57,8 @@ def home_page() :
     model.fit(x_train, y_train, epochs=25, batch_size=32)
 
     #Testing the Model
-    test_start = dt.datetime(2022,1,1)
-    test_end = dt.datetime.now()
+    test_start = tz.localize(dt.datetime(2022,1,1))
+    test_end = tz.localize(dt.datetime.today())
 
     test_data = pdr.get_data_yahoo(f'{crypto_currency}-{fiat_currency}', start=test_start, end=test_end)
     actual_prices = test_data['Close'].values
