@@ -107,5 +107,5 @@ def home_page() :
     #print(prediction)
     final_json = {'actual' : json_actual, 'predicted' : final_j_p, 'next_day_prediction' : prediction[0]}
     return final_json
-if __name__ == '__main__' : 
-    app.run(port=7777)
+#if __name__ == '__main__' : 
+#    app.run(port=7777)
